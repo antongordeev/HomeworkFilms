@@ -57,13 +57,6 @@ public class AddFilmFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        view.findViewById(R.id.tip1).setOnClickListener(v->{
-//            //передаем инфо в 1 фрагмент
-//            Bundle result = new Bundle();
-//            result.putString("bundleKey", ((EditText) v).getText().toString());
-//            getParentFragmentManager().setFragmentResult("key1", result);
-//        }) ;
-
         view.findViewById(R.id.btn_add_film).setOnClickListener(v -> {
             EditText name = view.findViewById(R.id.tip1);
             EditText description = view.findViewById(R.id.tip2);

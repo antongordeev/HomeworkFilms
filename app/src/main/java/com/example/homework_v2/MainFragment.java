@@ -55,39 +55,13 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
 
     AddFilmFragment addFilmFragment = new AddFilmFragment();
 
-    //объявляем слушателя
-//    private OnDetailClickListener listener = null;
-
-    //объявление интерфейса
-//    public interface OnDetailClickListener {
-//        void onDetailItemClick(int position);
-//    }
-
-    //конструктор Listener
-//    public void setListener(OnDetailClickListener listener) {
-//        this.listener = listener;
-//
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);//говорим активити, что у фрагмента есть свое меню
         super.onCreate(savedInstanceState);
         //при пересоздании фрагмент не будет убиваться
 //        setRetainInstance(true);
-
-
     }
-
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        //сохранение переменных типа булин
-//        outState.putBoolean("django", af_cl_django);
-//        outState.putBoolean("fiction", af_cl_fiction);
-//        outState.putBoolean("hollywood", af_cl_hollywood);
-//        outState.putBoolean("eight", af_cl_eight);
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -131,8 +105,6 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
                 choiceFilm = filmItem;
             }
         }
-//        FilmsItemsRepository.getInstance().getFavoriteItems().add(FilmsItemsRepository.getInstance().getItems().get(filmId));
-
         //add liked item to the favorite list
         FilmsItemsRepository.getInstance().getFavoriteItems().add(choiceFilm);
         //set Like
@@ -152,26 +124,6 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-//        adaptor.setOnDetailClickListener(new FilmsItemsAdaptor.OnDetailClickListener() {
-//            @Override
-//            public void onDetailItemClick(int position) {
-////                if (listener != null && position < Film.films.length) {
-////                    listener.onDetailItemClick(position);
-////                }
-//            }
-//        });
-
-
-        //обработка кликов и изменение цвета названия фильма
-//        view.findViewById(R.id.cardview_fiction).setOnClickListener(v -> {
-//            af_cl_fiction = true;
-//            textView_fiction = getActivity().findViewById(R.id.fiction_name);
-//            textView_fiction.setTextColor(getResources().getColor(R.color.colorAfterClick));
-//            if (listener != null) {
-//                listener.onDetailItemClick(v.getTag().toString());
-//            }
-//        });
-
         //получаем инфо из 2го фрагмента - название добавленного фильма в избранное
         getParentFragmentManager().setFragmentResultListener("key1", this, new FragmentResultListener() {
             @SuppressLint("ResourceAsColor")
@@ -187,69 +139,8 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
         });
-
-//        if (savedInstanceState != null) {
-//            //получение переменных булин для восстановления цвета названия фильма
-//            af_cl_django = savedInstanceState.getBoolean("django");
-//            af_cl_fiction = savedInstanceState.getBoolean("fiction");
-//            af_cl_hollywood = savedInstanceState.getBoolean("hollywood");
-//            af_cl_eight = savedInstanceState.getBoolean("eight");
-//
-//            textView_django.setTextColor(savedInstanceState.getInt(KEY1));
-//            textView_fiction.setTextColor(savedInstanceState.getInt(KEY2));
-//            textView_hollywood.setTextColor(savedInstanceState.getInt(KEY3));
-//            textView_eight.setTextColor(savedInstanceState.getInt(KEY4));
-//        }
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        //изменение цвета названия фильма, если он был кликнут - переменная - true
-//        if (af_cl_django) {
-//            Log.d("onsave", "4step");
-//
-//            textView_django = getActivity().findViewById(R.id.Django_name);
-//            textView_django.setTextColor(getResources().getColor(R.color.colorAfterClick));
-//        }
-//        if (af_cl_fiction) {
-//            textView_fiction = getActivity().findViewById(R.id.fiction_name);
-//            textView_fiction.setTextColor(getResources().getColor(R.color.colorAfterClick));
-//        }
-//        if (af_cl_hollywood) {
-//            textView_hollywood = getActivity().findViewById(R.id.hollywood_name);
-//            textView_hollywood.setTextColor(getResources().getColor(R.color.colorAfterClick));
-//        }
-//        if (af_cl_eight) {
-//            textView_eight = getActivity().findViewById(R.id.eight_name);
-//            textView_eight.setTextColor(getResources().getColor(R.color.colorAfterClick));
-//        }
-//    }
-
-//    @Override
-//    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-//        mDrawerToggle.onConfigurationChanged(newConfig);
-//        super.onConfigurationChanged(newConfig);
-//
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-////        if (mDrawerToggle.onOptionsItemSelected(item)) {
-////            return true;
-////        }
-//        //обработка клика "Add Film"
-//        switch (item.getItemId()) {
-//            case R.id.add_film:
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.fragment_container, addFilmFragment, AddFilmFragment.TAG)
-//                        .addToBackStack(null)
-//                        .commit();
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -319,6 +210,4 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 }

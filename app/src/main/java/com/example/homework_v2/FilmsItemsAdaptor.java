@@ -23,12 +23,6 @@ public class FilmsItemsAdaptor extends RecyclerView.Adapter<FilmsItemViewHolder>
         void onLikeClick(int filmId);
     }
 
-    //вызовем этот метод во фрагменте и передадим листнер
-//    public void setOnDetailClickListener (OnDetailClickListener listener) {
-//        detailListener = listener;
-//    }
-
-
     public FilmsItemsAdaptor(List<FilmItem> items, OnDetailClickListener listener) {
         this.items = items;
         this.detailListener = listener;

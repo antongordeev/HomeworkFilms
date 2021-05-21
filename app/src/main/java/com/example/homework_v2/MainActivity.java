@@ -61,28 +61,13 @@ public class MainActivity extends AppCompatActivity  {
                 return true;
             }
         });
-
-//        if (savedInstanceState != null) {
-//            fragment = (MainFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
-//        }
     }
 
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-//        getSupportFragmentManager().putFragment(outState, "fragment", fragment);
-
     }
-
-//    @Override
-//    public void onDetailItemClick(int position) {
-//                getSupportFragmentManager()
-//                .beginTransaction()
-//                .addToBackStack(null)
-//                .replace(R.id.fragment_container, DetailFragment.newInstance(position), DetailFragment.TAG)
-//                .commit();
-//    }
 
     @Override
     public void onBackPressed() {

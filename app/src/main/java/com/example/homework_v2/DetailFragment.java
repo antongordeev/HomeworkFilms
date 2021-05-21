@@ -57,7 +57,6 @@ public class DetailFragment extends Fragment {
             choiceFilmId = getArguments().getInt(EXTRA_FILMID, 0);
 
         }
-//        FilmItem filmItem = FilmsItemsRepository.getInstance().getItems().get(position);
         FilmItem choiceFilm = null;
         for (FilmItem filmItem : FilmsItemsRepository.getInstance().getItems()) {
             if (filmItem.filmId == choiceFilmId) {
