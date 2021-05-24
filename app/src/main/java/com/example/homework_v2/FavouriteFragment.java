@@ -41,23 +41,20 @@ public class FavouriteFragment extends Fragment implements FilmsItemsAdaptor.OnD
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
     }
 
     @Override
     public void onLikeClick(int choiceFilmId) {
-
         FilmItem choiceFilm = null;
-        for (FilmItem filmItem : FilmsItemsRepository.getInstance().getFavoriteItems()) {
+        for (FilmItem filmItem : FilmsItemsRepository.getInstance().getItems()) {
             if (filmItem.filmId == choiceFilmId) {
                 choiceFilm = filmItem;
             }
         }
-        //remove from the list of favorites
-        FilmsItemsRepository.getInstance().getFavoriteItems().remove(choiceFilm);
+        choiceFilm.isLiked = !choiceFilm.isLiked;
+        //обновляем список
+        FilmsItemsRepository.getInstance().getFavoriteItems();
         recyclerView.getAdapter().notifyDataSetChanged();
-        //set disLike
-        choiceFilm.isLiked = false;
     }
 
     @Override
@@ -77,6 +74,7 @@ public class FavouriteFragment extends Fragment implements FilmsItemsAdaptor.OnD
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewFav);
+
         FilmsItemsAdaptor adaptor = new FilmsItemsAdaptor(FilmsItemsRepository.getInstance().getFavoriteItems(), this);
         recyclerView.setAdapter(adaptor);
         //создание табличного LayoutManager с 2 столбцами. в параметрах контекст (активность) и колво столбцов

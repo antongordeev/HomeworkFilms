@@ -49,6 +49,8 @@ import java.util.List;
 
 public class MainFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, FilmsItemsAdaptor.OnDetailClickListener {
 
+    private RecyclerView recyclerView;
+
     public static final String TAG = "MainFragment";
 
     private ShareActionProvider shareActionProvider;//переменная для share
@@ -98,6 +100,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void onLikeClick(int choiceFilmId) {
+        FilmsItemsRepository.getInstance().getFavoriteItems();
         //find the right film by filmId
         FilmItem choiceFilm = null;
         for (FilmItem filmItem : FilmsItemsRepository.getInstance().getItems()) {
@@ -105,10 +108,8 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
                 choiceFilm = filmItem;
             }
         }
-        //add liked item to the favorite list
-        FilmsItemsRepository.getInstance().getFavoriteItems().add(choiceFilm);
-        //set Like
-        choiceFilm.isLiked = true;
+        choiceFilm.isLiked = !choiceFilm.isLiked;
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
@@ -116,7 +117,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         super.onViewCreated(view, savedInstanceState);
 
         //create recyclerview
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         //get the list from the repository
         FilmsItemsAdaptor adaptor = new FilmsItemsAdaptor(FilmsItemsRepository.getInstance().getItems(), this);
         recyclerView.setAdapter(adaptor);

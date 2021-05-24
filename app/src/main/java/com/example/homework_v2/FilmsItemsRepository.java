@@ -33,6 +33,12 @@ public class FilmsItemsRepository {
 
     //get the list of favorites items
     public List<FilmItem> getFavoriteItems() {
+        favoriteItems.clear();
+        for (FilmItem filmItem : items) {
+            if (filmItem.isLiked) {
+                favoriteItems.add(filmItem);
+            }
+        }
         return favoriteItems;
     }
 

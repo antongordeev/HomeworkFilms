@@ -42,6 +42,11 @@ public class FilmsItemsAdaptor extends RecyclerView.Adapter<FilmsItemViewHolder>
         //pass the data to cardImage which is in ViewHolder by position
         holder.cardImage.setImageResource(currentItem.getImageResourceId());
         holder.cardName.setText(currentItem.getTitle());
+        if (currentItem.getIsLiked()) {
+            holder.likeButton.setImageResource(R.drawable.ic_baseline_favorite_like);
+        } else {
+            holder.likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
         //listen the clicks on item and like button
         holder.itemView.setOnClickListener(v -> {
             if (detailListener != null)
