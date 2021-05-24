@@ -1,5 +1,6 @@
 package com.example.homework_v2;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,7 @@ public class FavouriteFragment extends Fragment implements FilmsItemsAdaptor.OnD
 
     @Override
     public void onLikeClick(int choiceFilmId) {
+        Toast.makeText(getContext(), "Удалено из любимых фильмов", Toast.LENGTH_SHORT).show();
         FilmItem choiceFilm = null;
         for (FilmItem filmItem : FilmsItemsRepository.getInstance().getItems()) {
             if (filmItem.filmId == choiceFilmId) {
