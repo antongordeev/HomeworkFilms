@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 
 public class DetailFragment extends Fragment {
 
@@ -75,7 +77,13 @@ public class DetailFragment extends Fragment {
         });
 
         ImageView photo = (ImageView) view.findViewById(R.id.imageView_detail);
-        photo.setImageResource(choiceFilm.getImageResourceId());
+//        photo.setImageResource(choiceFilm.getImageResourceId());
+        //use Glide
+        Glide.with(getContext())
+                .load(choiceFilm.imageResourceId)
+                .placeholder(R.drawable.ic_baseline_image_24)
+                .into(photo);
+
         photo.setContentDescription(choiceFilm.getTitle());
     }
 

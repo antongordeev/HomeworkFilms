@@ -44,7 +44,7 @@ public class FilmsItemsAdaptor extends RecyclerView.Adapter<FilmsItemViewHolder>
         //get the position we look at
         FilmItem currentItem = items.get(position);
         //pass the data to cardImage which is in ViewHolder by position
-        holder.cardImage.setImageResource(currentItem.getImageResourceId());
+//        holder.cardImage.setImageResource(currentItem.getImageResourceId());
 
 //        Picasso.get()
 //                //откуда
@@ -55,11 +55,12 @@ public class FilmsItemsAdaptor extends RecyclerView.Adapter<FilmsItemViewHolder>
 //                .error(R.drawable.ic_baseline_error_outline_24) //если ошибка
 //                //куда
 //                .into(holder.cardImage);
-//        Glide.with(holder.cardImage.getContext())
-//                .load(currentItem.imageResourceId)
-////                .centerCrop()
-//                .placeholder(R.drawable.ic_baseline_image_24)
-//                .into(holder.cardImage);
+        //use Glide
+        Glide.with(holder.cardImage.getContext())
+                .load(currentItem.imageResourceId)
+//                .centerCrop()
+                .placeholder(R.drawable.ic_baseline_image_24)
+                .into(holder.cardImage);
 
         holder.cardName.setText(currentItem.getTitle());
         if (currentItem.getIsLiked()) {

@@ -6,6 +6,6 @@ public class FilmJson {
 //    @SerializedName("name")
     public String title;
     public String description;
-//    @SerializedName("img")
-    public int imageResourceId;
+    @SerializedName("img")
+    public String imageResourceId;
 }

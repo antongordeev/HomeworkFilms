@@ -136,8 +136,8 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
 
                 //new next Id for new added film
                 int size = FilmsItemsRepository.getInstance().getItems().size();
-
-                FilmsItemsRepository.getInstance().getItems().add(new FilmItem(name, R.drawable.ic_baseline_image_24, description, size, false));
+                //parse drawable to the String
+                FilmsItemsRepository.getInstance().getItems().add(new FilmItem(name, "drawable://" + R.drawable.ic_baseline_image_24, description, size, false));
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
         });
