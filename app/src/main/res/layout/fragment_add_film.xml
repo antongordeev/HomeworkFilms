@@ -30,7 +30,6 @@
             android:layout_marginEnd="16dp"
             android:hint="@string/name_film"
             android:inputType="text"
-            android:onClick="add_the_name_click"
             app:hintTextAppearance="@style/HintText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

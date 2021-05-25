@@ -20,35 +20,11 @@ public class FilmsItemsRepository {
     private static FilmsItemsRepository instance;
     //конструктор. создание списка
     private FilmsItemsRepository() {
-        Log.d("checknow", "FilmsItemsRepository");
-        HomeworkApp.getInstance().filmApiService.getMovies().enqueue(new Callback<List<FilmJson>>() {
-            @Override
-            public void onResponse(Call<List<FilmJson>> call, Response<List<FilmJson>> response) {
-                if (response.isSuccessful()) {
-                    List<FilmJson> filmJsonList = response.body();
-
-                    for (int i = 0; i < filmJsonList.size(); i++) {
-                        items.add(new FilmItem(filmJsonList.get(i), false, i));
-                    }
-                    Log.d("checknow", "listisfull");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<FilmJson>> call, Throwable t) {
-            }
-        });
-
-
-//        for(int i = 0; i < Film.films.length; i++) {
-//            items.add(new FilmItem(Film.films[i].getName(), Film.films[i].getImageResourceId(), Film.films[i].getDescription(), i, false));
-//        }
     }
 
     //создание singltone
     public static FilmsItemsRepository getInstance() {
         //объект будет всего один
-        Log.d("checknow", "getInstance");
         if (instance == null) {
             instance = new FilmsItemsRepository();
         }
@@ -57,7 +33,6 @@ public class FilmsItemsRepository {
 
     // метод откуда получаем список
     public List<FilmItem> getItems() {
-        Log.d("checknow", "getItems");
         return items;
     }
 

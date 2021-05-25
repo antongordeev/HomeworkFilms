@@ -28,6 +28,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,6 +47,10 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, FilmsItemsAdaptor.OnDetailClickListener {
@@ -115,16 +121,41 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //add the loader and progress bar
+        View loader = view.findViewById(R.id.loader);
+        loader.setVisibility(View.INVISIBLE);
 
         //create recyclerview
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        //get the list from the repository
-        Log.d("checknow", "onViewCreated");
         FilmsItemsAdaptor adaptor = new FilmsItemsAdaptor(FilmsItemsRepository.getInstance().getItems(), this);
         recyclerView.setAdapter(adaptor);
         //создание табличного LayoutManager с 2 столбцами. в параметрах контекст (активность) и колво столбцов
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        //use server to get the list
+        if (FilmsItemsRepository.getInstance().getItems().isEmpty()) {
+            loader.setVisibility(View.VISIBLE);
+
+            HomeworkApp.getInstance().filmApiService.getMovies().enqueue(new Callback<List<FilmJson>>() {
+                @Override
+                public void onResponse(Call<List<FilmJson>> call, Response<List<FilmJson>> response) {
+                    if (response.isSuccessful()) {
+                        List<FilmJson> filmJsonList = response.body();
+
+                        for (int i = 0; i < filmJsonList.size(); i++) {
+                            FilmsItemsRepository.getInstance().getItems().add(new FilmItem(filmJsonList.get(i), false, i));
+                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
+                        //delete loader
+                        loader.setVisibility(View.GONE);
+                    }
+                }
+                @Override
+                public void onFailure(Call<List<FilmJson>> call, Throwable t) {
+                }
+            });
+        }
 
         //получаем инфо из 2го фрагмента - название добавленного фильма в избранное
         getParentFragmentManager().setFragmentResultListener("key1", this, new FragmentResultListener() {
