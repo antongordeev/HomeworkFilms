@@ -119,6 +119,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         //create recyclerview
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         //get the list from the repository
+        Log.d("checknow", "onViewCreated");
         FilmsItemsAdaptor adaptor = new FilmsItemsAdaptor(FilmsItemsRepository.getInstance().getItems(), this);
         recyclerView.setAdapter(adaptor);
         //создание табличного LayoutManager с 2 столбцами. в параметрах контекст (активность) и колво столбцов
@@ -141,7 +142,6 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
             }
         });
     }
-
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

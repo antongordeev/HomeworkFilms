@@ -18,6 +18,14 @@ public class FilmItem {
         this.isLiked = isLiked;
     }
 
+    public FilmItem(FilmJson filmJson, boolean isLiked, int filmId) {
+        this.title = filmJson.title;
+        this.description = filmJson.description;
+        this.imageResourceId = filmJson.imageResourceId;
+        this.isLiked = isLiked;
+        this.filmId = filmId;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -11,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class FilmsItemsAdaptor extends RecyclerView.Adapter<FilmsItemViewHolder> {
@@ -41,6 +45,22 @@ public class FilmsItemsAdaptor extends RecyclerView.Adapter<FilmsItemViewHolder>
         FilmItem currentItem = items.get(position);
         //pass the data to cardImage which is in ViewHolder by position
         holder.cardImage.setImageResource(currentItem.getImageResourceId());
+
+//        Picasso.get()
+//                //откуда
+//                .load(currentItem.imageResourceId)
+//                .fit() //что бы влез в контейнер, который задаем в XML
+//                .centerCrop() // растянуть
+//                .placeholder(R.drawable.ic_launcher_foreground) //типо заглушки
+//                .error(R.drawable.ic_baseline_error_outline_24) //если ошибка
+//                //куда
+//                .into(holder.cardImage);
+//        Glide.with(holder.cardImage.getContext())
+//                .load(currentItem.imageResourceId)
+////                .centerCrop()
+//                .placeholder(R.drawable.ic_baseline_image_24)
+//                .into(holder.cardImage);
+
         holder.cardName.setText(currentItem.getTitle());
         if (currentItem.getIsLiked()) {
             holder.likeButton.setImageResource(R.drawable.ic_baseline_favorite_like);
